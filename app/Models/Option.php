@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Option extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'name',
+        'type',
+    ];
 
     // Relación uno a muchos
     public function products()

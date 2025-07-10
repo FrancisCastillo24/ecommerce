@@ -9,6 +9,13 @@ class Feature extends Model
 {
     use HasFactory;
 
+    
+    protected $fillable = [
+        'value',
+        'description',
+        'option_id',
+    ];
+
     // Relación uno a muchos inversa, una carasterística pertenece a UNA opción
     public function option()
     {

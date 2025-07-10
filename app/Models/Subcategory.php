@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Subcategory extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'name',
+        'category_id',
+    ];
 
     // Relación uno a muchos inversa, una subcategoría pertenece a UNA categoría
     public function category()

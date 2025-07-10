@@ -9,6 +9,11 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'family_id',
+    ];
+
     // Relación uno muchos inversa, cada categoría pertenece a una familia
     public function family()
     {

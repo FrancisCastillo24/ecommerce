@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Variant extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'sky',
+        'image_path',
+        'product_id',
+    ];
 
     // Relación uno a muchos inversa, una variante pertenece a un producto
     public function product()

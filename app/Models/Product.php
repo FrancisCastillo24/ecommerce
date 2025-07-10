@@ -9,6 +9,16 @@ class Product extends Model
 {
     use HasFactory;
 
+    
+    protected $fillable = [
+        'sku',
+        'name',
+        'description',
+        'image_path',
+        'price',
+        'subcategory_id',
+    ];
+
     // Relación uno a muchos inversa, un producto pertenece a una sola subcategoría
     public function subcategory()
     {
