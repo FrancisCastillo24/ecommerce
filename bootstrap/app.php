@@ -13,7 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         // Definir el archivo admin.php de routes para que Laravel lo reconozca
         then: function(){
-            Route::middleware('web')
+            Route::middleware('web', 'auth')
+            ->prefix('admin')
+            ->name('admin.')
             ->group(base_path('routes/admin.php'));
         }
     )
