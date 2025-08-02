@@ -5,6 +5,15 @@
                 'name' => 'Dashboard',
                 'route' => 'admin.dashboard',
                 'active' => request()->routeIs('admin.dashboard'),
+            ],
+
+            // Array de clases
+            [
+                // Familia de productos
+                'name' => 'Familias',
+                'icon' => 'fa-solid fa-box-open',
+                'route' => 'admin.families.index',
+                'active' => request()->routeIs('admin.families.*'),
             ]
         ];
     ?>

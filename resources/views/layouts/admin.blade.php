@@ -44,7 +44,10 @@
     <div class="p-4 sm:ml-64">
 
         <div class="mt-14">
-            @include('layouts.partials.admin.breadcrumb')
+
+            <div class="flex justify-between items-center">
+                @include('layouts.partials.admin.breadcrumb')
+            </div>
 
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
                 {{$slot}}
