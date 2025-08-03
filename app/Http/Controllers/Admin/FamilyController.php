@@ -13,8 +13,8 @@ class FamilyController extends Controller
      */
     public function index()
     {
-        // Retorna la vista de familia
-        $families = Family::paginate();
+        // Retorna la vista de familia ordenado de forma descendente
+        $families = Family::orderBy('id', 'desc')->paginate();
         return view('admin.families.index', compact('families'));
     }
 
@@ -23,7 +23,8 @@ class FamilyController extends Controller
      */
     public function create()
     {
-        //
+        // Retorna el formulario de familia
+        return view('admin.families.create');
     }
 
     /**
@@ -31,15 +32,21 @@ class FamilyController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // Recogemos los datos del fomulario y lo almacenamos en la BBDD
+        $request->validate([
+            'name' => 'required'
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Family $family)
-    {
-        //
+        Family::create($request->all());
+
+        // Esto es para mostrar el mensaje alert
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => '¡Bien Hecho!',
+            'text' => 'Familia creada correctamente.'
+        ]);
+
+        return redirect()->route('admin.families.index');
     }
 
     /**
@@ -48,6 +55,7 @@ class FamilyController extends Controller
     public function edit(Family $family)
     {
         //
+        return view('admin.families.edit', compact('family'));
     }
 
     /**
@@ -55,7 +63,21 @@ class FamilyController extends Controller
      */
     public function update(Request $request, Family $family)
     {
-        //
+
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $family->update($request->all());
+
+        // Esto es para mostrar el mensaje alert
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => '¡Bien Hecho!',
+            'text' => 'Familia actualizada correctamente.'
+        ]);
+
+        return redirect()->route('admin.families.edit', $family);
     }
 
     /**
@@ -63,6 +85,24 @@ class FamilyController extends Controller
      */
     public function destroy(Family $family)
     {
-        //
+        if ($family->categories->count() > 0) {
+            session()->flash('swal', [
+                'icon' => 'error',
+                'title' => 'Ups!',
+                'text' => 'No se puede eliminar la familia porque tiene categorías asociadas.'
+            ]);
+
+            return redirect()->route('admin.families.edit', $family);
+        }
+        $family->delete();
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => '¡Bien Hecho!',
+            'text' => 'Familia eliminada correctamente.'
+        ]);
+
+
+        return redirect()->route('admin.families.index');
     }
 }

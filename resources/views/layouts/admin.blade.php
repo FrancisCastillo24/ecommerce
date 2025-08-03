@@ -15,9 +15,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Icons -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         crossorigin="anonymous" />
 
 
@@ -29,9 +27,10 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased" x-data="{sidebarOpen: false}" :class="{'overflow-y-hidden': sidebarOpen}">
+<body class="font-sans antialiased" x-data="{ sidebarOpen: false }" :class="{ 'overflow-y-hidden': sidebarOpen }">
 
-    <div style="display:none;" x-show="sidebarOpen" x-transition class="fixed inset-0 bg-black bg-opacity-50 z-30 sm:hidden" @click="sidebarOpen = false"></div>
+    <div style="display:none;" x-show="sidebarOpen" x-transition
+        class="fixed inset-0 bg-black bg-opacity-50 z-30 sm:hidden" @click="sidebarOpen = false"></div>
 
 
     @include('layouts.partials.admin.navigation')
@@ -47,18 +46,35 @@
 
             <div class="flex justify-between items-center">
                 @include('layouts.partials.admin.breadcrumb')
+
+                @isset($action)
+                    <div>
+                        {{ $action }}
+                    </div>
+                @endisset
             </div>
 
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-                {{$slot}}
+                {{ $slot }}
             </div>
 
         </div>
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @livewireScripts
+
+    @stack('js')
+
+     {{-- Mostrar alerta de confirmación, controlado en el update del controlador family --}}
+    @if (session('swal'))
+        <script>
+            Swal.fire({!! json_encode(session('swal')) !!})
+        </script>
+    @endif
+
 </body>
 
 </html>
