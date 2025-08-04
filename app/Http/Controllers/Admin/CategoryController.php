@@ -14,8 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // Retornamos la vista de categorías
-        $categories = Category::orderBy('id', 'desc')->paginate(10);
+        // Retornamos la vista de categorías, usamos with para evitar demasiadas consultas a la base de datos
+        $categories = Category::orderBy('id', 'desc')->with('family')->paginate(10);
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -53,19 +53,13 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Category $category)
     {
         //
+        $families = Family::all();
+        return view('admin.categories.edit', compact('category', 'families'));
     }
 
     /**
@@ -74,6 +68,22 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //
+        $request->validate([
+            'family_id' => 'required|exists:families,id',
+            'name' => 'required',
+        ]);
+
+        $category->update($request->all());
+
+
+        // Esto es para mostrar el mensaje alert
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => '¡Bien Hecho!',
+            'text' => 'Categoría actualizada correctamente.'
+        ]);
+
+        return redirect()->route('admin.categories.edit', $category);
     }
 
     /**
@@ -81,6 +91,25 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+
+        if ($category->subcategories()->count() > 0) {
+            session()->flash('swal', [
+                'icon' => 'error',
+                'title' => 'Ups!',
+                'text' => 'No se puede eliminar la categoría porque tiene subcategorías asociadas.'
+            ]);
+
+            return redirect()->route('admin.categories.edit', $category);
+        }
+        $category->delete();
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => '¡Bien Hecho!',
+            'text' => 'Categoría eliminada correctamente.'
+        ]);
+
+
+        return redirect()->route('admin.categories.index');
     }
 }
