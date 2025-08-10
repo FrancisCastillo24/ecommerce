@@ -54,7 +54,6 @@ class FamilyController extends Controller
      */
     public function edit(Family $family)
     {
-        //
         return view('admin.families.edit', compact('family'));
     }
 

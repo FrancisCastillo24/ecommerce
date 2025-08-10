@@ -21,7 +21,14 @@
             'icon' => 'fa-solid fa-tags',
             'route' => 'admin.categories.index',
             'active' => request()->routeIs('admin.categories.*'),
-        ]
+        ],
+        [
+            // Familia de subcategorias
+            'name' => 'Subcategorias',
+            'icon' => 'fa-solid fa-tag',
+            'route' => 'admin.subcategories.index',
+            'active' => request()->routeIs('admin.subcategories.*'),
+        ],
     ];
     ?>
 
