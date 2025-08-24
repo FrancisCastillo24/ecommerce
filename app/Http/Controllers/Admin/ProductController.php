@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -33,20 +34,13 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
@@ -62,6 +56,15 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        Storage::delete($product->image_path);
+        $product->delete();
+
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => '¡Bien Hecho!',
+            'text' => 'Producto elimninado correctamente.'
+        ]);
+
+        return redirect()->route('admin.products.index');
     }
 }
