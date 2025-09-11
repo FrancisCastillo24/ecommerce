@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         // Aquí tengo todo el gran array de familias, categorías y subcategorías.
         $this->call([
             FamilySeeder::class,
+            OptionSeeder::class,
         ]);
 
         Product::factory(150)->create();

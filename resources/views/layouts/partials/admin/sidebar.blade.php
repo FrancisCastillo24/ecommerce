@@ -6,7 +6,7 @@
             'route' => 'admin.dashboard',
             'active' => request()->routeIs('admin.dashboard'),
         ],
-    
+
         // Array de clases
         [
             // Familia de productos
@@ -14,6 +14,13 @@
             'icon' => 'fa-solid fa-box-open',
             'route' => 'admin.families.index',
             'active' => request()->routeIs('admin.families.*'),
+        ],
+        [
+            // Familia de opciones
+            'name' => 'Opciones',
+            'icon' => 'fa-solid fa-cog',
+            'route' => 'admin.options.index',
+            'active' => request()->routeIs('admin.options.*'),
         ],
         [
             // Familia de categorias
@@ -36,6 +43,7 @@
             'route' => 'admin.products.index',
             'active' => request()->routeIs('admin.products.*'),
         ],
+
     ];
     ?>
 
@@ -46,17 +54,17 @@
             <ul class="space-y-2 font-medium">
 
                 @foreach ($links as $link)
-                    <li>
-                        <a href="{{ route($link['route']) }}"
-                            class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100group {{ $link['active'] ? 'bg-gray-100' : '' }}">
+                <li>
+                    <a href="{{ route($link['route']) }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100group {{ $link['active'] ? 'bg-gray-100' : '' }}">
 
-                            <span class="inline-flex w-6 h-6 justify-content-center items-center">
-                                <i class="{{ $link['icon'] }}"></i>
-                            </span>
+                        <span class="inline-flex w-6 h-6 justify-content-center items-center">
+                            <i class="{{ $link['icon'] }}"></i>
+                        </span>
 
-                            <span class="ms-3">{{ $link['name'] }}</span>
-                        </a>
-                    </li>
+                        <span class="ms-3">{{ $link['name'] }}</span>
+                    </a>
+                </li>
                 @endforeach
             </ul>
         </div>
