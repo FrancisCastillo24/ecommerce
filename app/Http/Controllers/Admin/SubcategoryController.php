@@ -57,13 +57,6 @@ class SubcategoryController extends Controller
         return view('admin.subcategories.edit', compact('subcategory'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Subcategory $subcategory)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

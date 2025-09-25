@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -26,14 +25,6 @@ class ProductController extends Controller
         return view('admin.products.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -43,13 +34,6 @@ class ProductController extends Controller
         return view('admin.products.edit', compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Product $product)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
