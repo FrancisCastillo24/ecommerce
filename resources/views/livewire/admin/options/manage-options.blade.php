@@ -6,7 +6,7 @@
 
             <div class="flex justify-between">
                 <h1 class="text-lg font-semibold text-gray-700">Opciones</h1>
-                <x-button wire:click="$set('openModal', true)">Nuevo</x-button>
+                <x-button wire:click="$set('newOption.openModal', true)">Nuevo</x-button>
             </div>
 
         </header>
@@ -55,7 +55,7 @@
     </section>
 
     <!-- Llamamos a la variable openModal de Livewire ManageOptions -->
-    <x-dialog-modal wire:model="openModal">
+    <x-dialog-modal wire:model="newOption.openModal">
 
         <!-- Hace referencia a la variable del componente dialog-modal-->
         <x-slot name="title">Crear nueva opción</x-slot>
@@ -101,7 +101,8 @@
 
             <div class="mb-4 space-y-4">
 
-                @foreach ($newOption['features'] as $index => $feature)
+                <!--Es un objeto no un array, se accede al atributo con la flecha -->
+                @foreach ($newOption->features as $index => $feature)
                 <!-- Agregamos la llave key para hacer un seguimiento-->
                 <div class="p-6 rounded-lg border border-gray-200 relative" wire:key="features-{{ $index }}">
                     <div class="grid grid-cols-2 gap-6">
@@ -115,7 +116,7 @@
                             <x-label class="mb-1">Valor</x-label>
 
                             <!--Elegimos un tipo-->
-                            @switch($newOption['type'])
+                            @switch($newOption->type)
                             @case(1)
                             <x-input wire:model="newOption.features.{{ $index }}.value" class="w-full"
                                 placeholder="Ingrese un valor de la opción"></x-input>
