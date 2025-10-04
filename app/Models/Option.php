@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Option extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'name',
         'type',
@@ -18,7 +18,8 @@ class Option extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class)
-            ->withPivot('value') // Quiero que me recupere el valor del atributo value
+            ->using(OptionProduct::class)
+            ->withPivot('features') // Quiero que me recupere el valor del atributo feature
             ->withTimestamps();
     }
 

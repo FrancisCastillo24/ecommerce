@@ -9,7 +9,6 @@ class Product extends Model
 {
     use HasFactory;
 
-    
     protected $fillable = [
         'sku',
         'name',
@@ -34,8 +33,9 @@ class Product extends Model
     // Relación uno a muchos, un producto tiene a una sola opción (solo existen dos campos, product_id y option_id)
     public function options()
     {
-        return $this->belongsTo(Option::class)
-            ->withPivot('value') // Quiero que me recupere el valor del atributo value
+        return $this->belongsToMany(Option::class)
+            ->using(OptionProduct::class)
+            ->withPivot('features') // Quiero que me recupere el valor del atributo feature
             ->withTimestamps();
     }
 }

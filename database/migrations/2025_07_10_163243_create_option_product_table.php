@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('option_id')->constrained();
             $table->foreignId('product_id')->constrained();
 
-            $table->string('value'); // Hace referencia al value de features
+            $table->json('features'); // Hace referencia al value de features
 
 
 
