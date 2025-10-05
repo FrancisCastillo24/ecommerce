@@ -10,7 +10,7 @@ class Variant extends Model
     use HasFactory;
     
     protected $fillable = [
-        'sky',
+        'sku',
         'image_path',
         'product_id',
     ];

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('price');
 
             // Relaciones
-            $table->foreignId('subcategory_id')->constrained();
+            $table->foreignId('subcategory_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
