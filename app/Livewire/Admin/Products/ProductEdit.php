@@ -7,6 +7,7 @@ use App\Models\Family;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -30,7 +31,7 @@ class ProductEdit extends Component
     public function mount($product)
     {
         // En la propiedad edit, almacenamos todos los datos del producto seleccionado pero con los siguientes campos
-        $this->productEdit = $product->only('sku', 'name', 'description', 'price', 'image_path', 'subcategory_id');
+        $this->productEdit = $product->only('sku', 'name', 'description', 'price', 'stock', 'image_path', 'subcategory_id');
         // dd($this->productEdit);
 
         // Vamos a recuperar todas las familias
@@ -71,6 +72,12 @@ class ProductEdit extends Component
         $this->productEdit['subcategory_id'] = '';
     }
 
+    #[On('variant-generate')]
+    public function updateProduct()
+    {
+        $this->product = $this->product->fresh();
+    }
+
     // Nos va a retornar todas las categorías dependiendo de lo que hayamos seleccionado en campo family_id
     #[Computed()]
     public function categories()
@@ -94,6 +101,7 @@ class ProductEdit extends Component
             'productEdit.name' => 'required|max:255',
             'productEdit.description' => 'nullable',
             'productEdit.price' => 'required|numeric|min:0',
+            'productEdit.stock' => 'required|numeric|min:0',
             'productEdit.subcategory_id' => 'required|exists:subcategories,id',
         ]);
 
