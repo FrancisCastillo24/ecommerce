@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,5 +40,13 @@ class Product extends Model
             ->using(OptionProduct::class)
             ->withPivot('features') // Quiero que me recupere el valor del atributo feature
             ->withTimestamps();
+    }
+
+    // Coge el path de la img y lo retorna como url
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => Storage::url($this->image_path),
+        );
     }
 }

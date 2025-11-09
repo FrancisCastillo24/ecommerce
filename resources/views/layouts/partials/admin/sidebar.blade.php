@@ -43,6 +43,13 @@
             'route' => 'admin.products.index',
             'active' => request()->routeIs('admin.products.*'),
         ],
+                [
+            // Familia de covers (imagenes)
+            'name' => 'Portadas',
+            'icon' => 'fa-solid fa-images',
+            'route' => 'admin.covers.index',
+            'active' => request()->routeIs('admin.covers.*'),
+        ],
 
     ];
     ?>
