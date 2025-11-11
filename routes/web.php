@@ -1,9 +1,17 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FamilyController;
+use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
+
+// Ruta de familias en el panel usuario
+Route::get('families/{family}', [FamilyController::class, 'show'])->name('families.show');
+Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('subcategory/{catsubcategoryegory}', [SubcategoryController::class, 'show'])->name('subcategories.show');
 
 Route::middleware([
     'auth:sanctum',
@@ -14,3 +22,4 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+

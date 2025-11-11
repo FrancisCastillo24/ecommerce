@@ -74,7 +74,7 @@
                             {{ $product->price }} €
                         </p>
 
-                        <a href="" class="btn btn-blue block w-full text-center">Ver más</a>
+                        <a href="" class="btn btn-purple block w-full text-center">Ver más</a>
                     </div>
                 </article>
 

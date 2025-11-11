@@ -19,5 +19,7 @@ export default {
         },
     },
 
+    darkMode: 'class', // ← forzar modo claro, ignorando dark:* si no hay class="dark"
+
     plugins: [forms, typography],
 };
