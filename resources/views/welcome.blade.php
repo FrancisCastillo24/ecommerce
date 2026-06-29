@@ -74,7 +74,7 @@
                             {{ $product->price }} €
                         </p>
 
-                        <a href="" class="btn btn-purple block w-full text-center">Ver más</a>
+                        <a href="{{ route('products.show', $product) }}" class="btn btn-purple block w-full text-center">Ver más</a>
                     </div>
                 </article>
 
